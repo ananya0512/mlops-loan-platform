@@ -13,7 +13,7 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
-
+MLFLOW_TRACKING_URI = "http://127.0.0.1:5000"
 DATA_PATH = "data/raw/loan_data.csv"
 TARGET_COLUMN = "loan_approved"
 
@@ -32,7 +32,7 @@ def prepare_data(df):
 
 def train_model(X_train, y_train):    ## function responsible for training the model. X_train-training features, y_train-training labels
     model = RandomForestClassifier(
-        n_estimators=200,             ## Create 100 decision trees inside the Random Forest.
+        n_estimators=100,             ## Create 100 decision trees inside the Random Forest.
         random_state=42               ## Machine-learning algorithms often involve randomness. Setting this makes the result reproducible.
     )
 
@@ -67,6 +67,7 @@ def evaluate_model(model, X_test, y_test):               ## model evaluation so 
 
 
 def main():                         ## main workflow of your training script.Think of it as the orchestrator.
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment("loan-approval")   ## set the mlflow experiment under which runs will be there
     df = load_data()                ## load datset, read csv and return df
 
@@ -97,7 +98,7 @@ def main():                         ## main workflow of your training script.Thi
 
         mlflow.log_param(                        ## log parameters (configurations or hyperparameters chosen during training)
             "n_estimators",
-            200
+            100
         )
 
         mlflow.log_param(
@@ -107,9 +108,9 @@ def main():                         ## main workflow of your training script.Thi
 
         mlflow.log_metrics(metrics)             ## logs metrices
 
-        mlflow.sklearn.log_model(               ## Save/log this trained model as an MLflow model artifact
-            model,
-            "model"
+        model_info = mlflow.sklearn.log_model(          ## Save/log this trained model as an MLflow model artifact
+            sk_model=model,
+            name="LoanApprovalModel"
         )
 
         print("\nModel Metrics")
