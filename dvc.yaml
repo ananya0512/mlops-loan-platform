@@ -1,0 +1,13 @@
+stages:
+
+  train:
+    cmd: python src/training/train.py
+
+    deps:                                    ## These files are dependencies of this stage. Any of these files change training needs to run.
+      - src/training/train.py
+      - data/raw/loan_data.csv
+
+    outs:
+      - models/loan_model.pkl       ## DVC assumes that a stage's outputs can be deleted and regenerated from its dependencies.
+
+## A pipeline stage should be reproducible from its declared dependencies and should be capable of recreating its outputs from scratch.      

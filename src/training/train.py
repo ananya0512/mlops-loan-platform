@@ -1,4 +1,6 @@
+import os
 import mlflow
+import joblib
 import mlflow.sklearn
 import pandas as pd
 
@@ -80,6 +82,12 @@ def main():                         ## main workflow of your training script.Thi
     with mlflow.start_run():                     ## starts mlflow run
 
         model = train_model(X_train, y_train)    ## This calls train_model() and executes random forest
+
+        os.makedirs("models", exist_ok=True)     ## DVC assumes that a stage's outputs can be deleted and regenerated from its dependencies. So it needs to be created.
+        joblib.dump(
+            model,
+            "models/loan_model.pkl"
+        )
 
         metrics = evaluate_model(                ## Take this trained model, make predictions on this unseen test data
             model,                               ## compare those predictions against the actual test labels, and calculate the metrics

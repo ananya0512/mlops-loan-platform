@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/training/train.py
+    deps:
+    - path: data/raw/loan_data.csv
+      hash: md5
+      md5: ec2e7f8fe36161250f0104c5df6cd142
+      size: 667
+    - path: src/training/train.py
+      hash: md5
+      md5: 640082d3c892517c60024d2aa14d4c47
+      size: 5550
+    outs:
+    - path: models/loan_model.pkl
+      hash: md5
+      md5: a0e9f8d28a717f7da5e5c93cb032acd1
+      size: 133609
