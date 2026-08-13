@@ -1,3 +1,5 @@
+## This file gives the rest of your application a loaded model object.
+
 import os
 
 import mlflow
@@ -27,7 +29,7 @@ def load_model():
         f"models:/{MODEL_NAME}/{MODEL_VERSION}"
     )
 
-    model = mlflow.sklearn.load_model(
+    model = mlflow.sklearn.load_model(                 ## MLflow retrieves the model and returns the actual trained sklearn model object.
         model_uri
     )
 

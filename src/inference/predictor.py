@@ -1,9 +1,12 @@
+## Converts API input into ML input
+## This file's responsibility is: Take the validated API request and convert it into the exact feature structure expected by the ML model.
+
 import numpy as np
 
 
 def predict(model, request):
 
-    features = np.array(
+    features = np.array(                 ## coverts input into [[feature1, feature2, feature3, feature4, feature5, feature6]] format
         [[
             request.age,
             request.income,
@@ -14,11 +17,11 @@ def predict(model, request):
         ]]
     )
 
-    prediction = model.predict(features)[0]
+    prediction = model.predict(features)[0]   ## calling the model and making prediction on the input features
 
-    prediction = int(prediction)
+    prediction = int(prediction)   ## Convert NumPy integer to Python integer
 
-    decision = (
+    decision = (                   ## Convert prediction into business meaning
         "approved"
         if prediction == 1
         else "rejected"
