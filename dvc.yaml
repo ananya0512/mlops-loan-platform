@@ -5,6 +5,7 @@ stages:
 
     deps:                                    ## These files are dependencies of this stage. Any of these files change training needs to run.
       - src/training/train.py
+      - src/config/features.py
       - data/raw/loan_data.csv
 
     outs:

@@ -12,6 +12,7 @@ from sklearn.metrics import (
     f1_score,         ## Precision + Recall. useful when you want to balance false positives and false negatives.
 )
 from sklearn.model_selection import train_test_split
+from src.config.features import FEATURES, TARGET      ## import parameters from src/config/features.py
 
 MLFLOW_TRACKING_URI = "http://127.0.0.1:5000"
 DATA_PATH = "data/raw/loan_data.csv"
