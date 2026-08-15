@@ -32,3 +32,9 @@ Thumbs.db
 
 # MLFlow
 mlflow/
+
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/terraform.tfvars
+terraform/crash.log

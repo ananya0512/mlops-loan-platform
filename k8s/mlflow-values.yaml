@@ -1,0 +1,25 @@
+backendStore:
+  databaseMigration: true
+
+  databaseConnectionCheck: true
+
+  postgres:
+    enabled: true
+    host: mlops-loan-mlflow.c7u22qg0ecy7.ap-south-1.rds.amazonaws.com
+    port: 5432
+    database: mlflow
+    user: mlflow
+
+  existingDatabaseSecret:
+    name: mlflow-db-secret
+    usernameKey: username
+    passwordKey: password
+
+artifactRoot:
+  s3:
+    enabled: true
+    bucket: mlops-loan-mlflow-artifacts-9ccf4518fcbd0debaff9289f8d
+    
+serviceAccount:
+  create: false
+  name: mlflow

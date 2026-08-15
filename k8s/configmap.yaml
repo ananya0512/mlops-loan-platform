@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: loan-approval-config
+
+data:
+  MODEL_NAME: "LoanApprovalModel"
+  MODEL_VERSION: "1"
